@@ -1,3 +1,25 @@
 *{
     color: #fff;
 }
+
+/* Reset button styles for game choices */
+.pedra, .papel, .tesoura {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 8px; /* Added for better focus indicator shape */
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Add hover effect */
+.pedra:hover, .papel:hover, .tesoura:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+/* Add focus state for accessibility */
+.pedra:focus-visible, .papel:focus-visible, .tesoura:focus-visible {
+    outline: 3px solid #26a69a; /* Teal color from Materialize */
+    outline-offset: 2px;
+}
