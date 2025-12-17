@@ -12,26 +12,37 @@ $(document).ready(function() {
 });
 
 $(".save-button").click(function () {
-    const playerName = $("#playerName").val();
-    if (playerName.trim() === "") {
+    const playerName = $("#playerName").val().trim();
+    if (playerName === "") {
         alert("Please enter a name.");
         return;
     }
 
-    const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-    const newScore = {
-        name: playerName,
-        wins: suasVitorias,
-        losses: suasDerrotas,
-        ties: empates
-    };
+    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    const existingScoreIndex = highScores.findIndex(score => score.name.toLowerCase() === playerName.toLowerCase());
 
-    highScores.push(newScore);
+    if (existingScoreIndex > -1) {
+        // Update existing score
+        highScores[existingScoreIndex].wins = suasVitorias;
+        highScores[existingScoreIndex].losses = suasDerrotas;
+        highScores[existingScoreIndex].ties = empates;
+    } else {
+        // Add new score
+        const newScore = {
+            name: playerName,
+            wins: suasVitorias,
+            losses: suasDerrotas,
+            ties: empates
+        };
+        highScores.push(newScore);
+    }
+
     highScores.sort((a, b) => b.wins - a.wins); // Sort by wins descending
     highScores.splice(MAX_HIGH_SCORES); // Keep only top 5
 
     localStorage.setItem('highScores', JSON.stringify(highScores));
     displayHighScores();
+    $("#playerName").val(""); // Clear input after saving
 });
 
 function displayHighScores() {
