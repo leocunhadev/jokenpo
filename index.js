@@ -11,28 +11,37 @@ $(document).ready(function() {
     displayHighScores();
 });
 
-$(".save-button").click(function () {
-    const playerName = $("#playerName").val();
-    if (playerName.trim() === "") {
-        alert("Please enter a name.");
-        return;
+function autoSaveScore() {
+    const playerName = $("#playerName").val().trim();
+    if (playerName === "") {
+        return; // Don't save if no name is entered
     }
 
-    const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-    const newScore = {
-        name: playerName,
-        wins: suasVitorias,
-        losses: suasDerrotas,
-        ties: empates
-    };
+    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    const existingScoreIndex = highScores.findIndex(score => score.name.toLowerCase() === playerName.toLowerCase());
 
-    highScores.push(newScore);
+    if (existingScoreIndex > -1) {
+        // Update existing score
+        highScores[existingScoreIndex].wins = suasVitorias;
+        highScores[existingScoreIndex].losses = suasDerrotas;
+        highScores[existingScoreIndex].ties = empates;
+    } else {
+        // Add new score
+        const newScore = {
+            name: playerName,
+            wins: suasVitorias,
+            losses: suasDerrotas,
+            ties: empates
+        };
+        highScores.push(newScore);
+    }
+
     highScores.sort((a, b) => b.wins - a.wins); // Sort by wins descending
     highScores.splice(MAX_HIGH_SCORES); // Keep only top 5
 
     localStorage.setItem('highScores', JSON.stringify(highScores));
     displayHighScores();
-});
+}
 
 function displayHighScores() {
     const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
@@ -70,6 +79,7 @@ $(".reset-button").click(function () {
   $(".empates").text(empates);
   ganhouPerdeu.text("");
   $(".imagemMao").removeClass("visible");
+  autoSaveScore(); // Persist the reset score
 });
 
 function dandoNome(choice) {
@@ -96,6 +106,7 @@ function resultado() {
     contadorDeDerrotas();
     ganhouPerdeu.text(`Você perdeu! ${computerChoiceName} vence ${playerChoiceName}.`);
   }
+  autoSaveScore();
 }
 
 function colocaImagem() {
