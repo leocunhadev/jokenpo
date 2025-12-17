@@ -1,44 +1,42 @@
 const MAX_HIGH_SCORES = 5;
 
-function autoSaveScore() {
+async function autoSaveScore() {
     const playerName = $("#playerName").val().trim();
     if (playerName === "") {
         return; // Don't save if no name is entered
     }
 
-    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-    const existingScoreIndex = highScores.findIndex(score => score.name.toLowerCase() === playerName.toLowerCase());
+    const scoreData = {
+        name: playerName,
+        wins: gameState.suasVitorias,
+        losses: gameState.suasDerrotas,
+        ties: gameState.empates
+    };
 
-    if (existingScoreIndex > -1) {
-        // Update existing score
-        highScores[existingScoreIndex].wins = gameState.suasVitorias;
-        highScores[existingScoreIndex].losses = gameState.suasDerrotas;
-        highScores[existingScoreIndex].ties = gameState.empates;
-    } else {
-        // Add new score
-        const newScore = {
-            name: playerName,
-            wins: gameState.suasVitorias,
-            losses: gameState.suasDerrotas,
-            ties: gameState.empates
-        };
-        highScores.push(newScore);
+    try {
+        await db.collection('scores').doc(playerName).set(scoreData);
+        displayHighScores();
+    } catch (error) {
+        console.error("Error saving score to Firestore: ", error);
     }
-
-    highScores.sort((a, b) => b.wins - a.wins); // Sort by wins descending
-    highScores.splice(MAX_HIGH_SCORES); // Keep only top 5
-
-    localStorage.setItem('highScores', JSON.stringify(highScores));
-    displayHighScores();
 }
 
-function displayHighScores() {
-    const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-    const highScoreList = $("#highScoreList");
+async function displayHighScores() {
+    const highScoreList = $("#highScoresList");
     highScoreList.empty();
 
-    highScores.forEach(score => {
-        const newScoreItem = `<li>${score.name} - V: ${score.wins}, D: ${score.losses}, E: ${score.ties}</li>`;
-        highScoreList.append(newScoreItem);
-    });
+    try {
+        const querySnapshot = await db.collection('scores')
+            .orderBy('wins', 'desc')
+            .limit(MAX_HIGH_SCORES)
+            .get();
+
+        querySnapshot.forEach((doc) => {
+            const score = doc.data();
+            const newScoreItem = `<li>${score.name} - V: ${score.wins}, D: ${score.losses}, E: ${score.ties}</li>`;
+            highScoreList.append(newScoreItem);
+        });
+    } catch (error) {
+        console.error("Error getting high scores from Firestore: ", error);
+    }
 }
