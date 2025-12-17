@@ -129,3 +129,31 @@ body {
     height: 40px;
     filter: invert(1);
 }
+
+.reset-button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 0.9rem;
+    color: #0f380f;
+    background-color: #9bbc0f;
+    border: 2px solid #306230;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.1s ease;
+}
+
+.reset-button:hover {
+    background-color: #8bac0f;
+    transform: translateY(-2px);
+}
+
+.reset-button:active {
+    transform: translateY(1px);
+}
+
+.reset-button:focus-visible {
+    outline: 3px solid #306230;
+    outline-offset: 2px;
+}

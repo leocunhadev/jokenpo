@@ -22,6 +22,17 @@ $(".tesoura").click(function () {
   resultado();
 });
 
+$(".reset-button").click(function () {
+  suasVitorias = 0;
+  suasDerrotas = 0;
+  empates = 0;
+  $(".vitorias").text(suasVitorias);
+  $(".derrotas").text(suasDerrotas);
+  $(".empates").text(empates);
+  ganhouPerdeu.text("");
+  $(".imagemMao").removeClass("visible");
+});
+
 function dandoNome(choice) {
   const choices = ["Pedra", "Papel", "Tesoura"];
   return choices[choice];
