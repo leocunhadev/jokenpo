@@ -139,7 +139,7 @@ body {
     color: #306230;
 }
 
-.save-button, .reset-button {
+.reset-button {
     width: 100%;
     padding: 10px;
     font-family: 'Press Start 2P', sans-serif;
@@ -154,7 +154,7 @@ body {
     margin-top: 5px;
 }
 
-.save-button:hover, .reset-button:hover {
+.reset-button:hover {
     background-color: #8bac0f;
 }
 
@@ -186,11 +186,11 @@ body {
     filter: invert(1);
 }
 
-.save-button:active, .reset-button:active {
+.reset-button:active {
     transform: translateY(1px);
 }
 
-.save-button:focus-visible, .reset-button:focus-visible {
+.reset-button:focus-visible {
     outline: 3px solid #306230;
     outline-offset: 2px;
 }

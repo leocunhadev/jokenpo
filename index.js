@@ -11,11 +11,10 @@ $(document).ready(function() {
     displayHighScores();
 });
 
-$(".save-button").click(function () {
+function autoSaveScore() {
     const playerName = $("#playerName").val().trim();
     if (playerName === "") {
-        alert("Please enter a name.");
-        return;
+        return; // Don't save if no name is entered
     }
 
     let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
@@ -42,8 +41,7 @@ $(".save-button").click(function () {
 
     localStorage.setItem('highScores', JSON.stringify(highScores));
     displayHighScores();
-    $("#playerName").val(""); // Clear input after saving
-});
+}
 
 function displayHighScores() {
     const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
@@ -81,6 +79,7 @@ $(".reset-button").click(function () {
   $(".empates").text(empates);
   ganhouPerdeu.text("");
   $(".imagemMao").removeClass("visible");
+  autoSaveScore(); // Persist the reset score
 });
 
 function dandoNome(choice) {
@@ -107,6 +106,7 @@ function resultado() {
     contadorDeDerrotas();
     ganhouPerdeu.text(`Você perdeu! ${computerChoiceName} vence ${playerChoiceName}.`);
   }
+  autoSaveScore();
 }
 
 function colocaImagem() {
