@@ -81,13 +81,13 @@ function resultado() {
 function colocaImagem() {
   var classImagens = $(".imagemMao");
   if (numeroAleatorio == 0) {
-    classImagens.attr("src", "img/pedra.png");
+    classImagens.attr("src", "img/pedra.png").attr("alt", "Rock");
   }
   if (numeroAleatorio == 1) {
-    classImagens.attr("src", "img/papel.png");
+    classImagens.attr("src", "img/papel.png").attr("alt", "Paper");
   }
   if (numeroAleatorio == 2) {
-    classImagens.attr("src", "img/tesoura.png");
+    classImagens.attr("src", "img/tesoura.png").attr("alt", "Scissors");
   }
 }
 
