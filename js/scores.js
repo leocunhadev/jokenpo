@@ -1,4 +1,4 @@
-const MAX_HIGH_SCORES = 5;
+const MAX_HIGH_SCORES = 10;
 
 function autoSaveScore() {
     const playerName = $("#playerName").val().trim();
@@ -33,9 +33,13 @@ function autoSaveScore() {
 }
 
 function displayHighScores() {
-    const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-    const highScoreList = $("#highScoreList");
+    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    const highScoreList = $("#highScoresList");
     highScoreList.empty();
+
+    // Sort and truncate the scores before displaying them.
+    highScores.sort((a, b) => b.wins - a.wins);
+    highScores.splice(MAX_HIGH_SCORES);
 
     highScores.forEach(score => {
         const newScoreItem = `<li>${score.name} - V: ${score.wins}, D: ${score.losses}, E: ${score.ties}</li>`;
