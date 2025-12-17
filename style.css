@@ -1,10 +1,131 @@
-*{
-    color: #fff;
+/* General Body Styles */
+body {
+    font-family: 'Press Start 2P', sans-serif;
+    /* A retro gaming font */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #d3d3d3;
+    margin: 0;
 }
 
-button.pedra, button.papel, button.tesoura {
-    background: none;
-    border: none;
-    padding: 0;
+/* Gameboy Container */
+.gameboy {
+    width: 320px;
+    height: 550px;
+    background-color: #a0a0a0;
+    border-radius: 10px 10px 30px 10px;
+    padding: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #808080;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Screen Styles */
+.screen {
+    background-color: #9bbc0f;
+    border: 4px solid #306230;
+    border-radius: 5px;
+    height: 250px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #0f380f;
+}
+
+.screen-title {
+    text-align: center;
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #306230;
+    line-height: 1.2;
+}
+
+.computer-choice {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.computer-choice img {
+    max-width: 80px;
+    filter: grayscale(1) contrast(1.5);
+    visibility: hidden;
+    /* Hide by default */
+}
+
+.computer-choice img.visible {
+    visibility: visible;
+    /* Show when class is added */
+}
+
+.results {
+    text-align: center;
+}
+
+.ganhou-perdeu {
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-height: 25px;
+}
+
+.scores {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Controls Section */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.action-buttons button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #505050;
+    background-color: #707070;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease;
+}
+
+.action-buttons button:hover {
+    background-color: #808080;
+    transform: translateY(-2px);
+}
+
+.action-buttons button:active {
+    transform: translateY(1px);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.action-buttons button:focus-visible {
+    outline: 3px solid #306230;
+    outline-offset: 2px;
+}
+
+.action-buttons img {
+    width: 40px;
+    height: 40px;
+    filter: invert(1);
 }
