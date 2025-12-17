@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 $("#playerName").focus(function () {
     $(this).data('last-name', $(this).val().trim());
-}).change(function () {
+}).on('input', function () {
     const playerName = $(this).val().trim();
     let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
