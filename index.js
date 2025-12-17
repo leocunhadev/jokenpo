@@ -22,20 +22,20 @@ $(".tesoura").click(function () {
   resultado();
 });
 
-function dandoNome(numeroClicado) {
-  if (numeroClicado == 0) {
-    numeroClicado = "Pedra";
-  }
+$(".reset-button").click(function () {
+  suasVitorias = 0;
+  suasDerrotas = 0;
+  empates = 0;
+  $(".vitorias").text(suasVitorias);
+  $(".derrotas").text(suasDerrotas);
+  $(".empates").text(empates);
+  ganhouPerdeu.text("");
+  $(".imagemMao").removeClass("visible");
+});
 
-  if (numeroClicado == 1) {
-    numeroClicado = "Papel";
-  }
-
-  if (numeroClicado == 2) {
-    numeroClicado = "Tesoura";
-  }
-
-  return numeroClicado;
+function dandoNome(choice) {
+  const choices = ["Pedra", "Papel", "Tesoura"];
+  return choices[choice];
 }
 
 function geraNumero() {
@@ -44,37 +44,18 @@ function geraNumero() {
 }
 
 function resultado() {
+  const playerChoiceName = dandoNome(numeroClicado);
+  const computerChoiceName = dandoNome(numeroAleatorio);
+
   if (numeroClicado == numeroAleatorio) {
     numDeEmpates();
-    ganhouPerdeu.text("Você empatou com o computador!");
+    ganhouPerdeu.text(`Empate! Ambos escolheram ${playerChoiceName}.`);
+  } else if ((numeroClicado - numeroAleatorio + 3) % 3 == 1) {
+    contadorDeVitorias();
+    ganhouPerdeu.text(`Você ganhou! ${playerChoiceName} vence ${computerChoiceName}.`);
   } else {
-    if (numeroClicado == 0) {
-      if (numeroAleatorio == 2) {
-        contadorDeVitorias();
-        ganhouPerdeu.text("Você ganhou!");
-      } else {
-        contadorDeDerrotas();
-        ganhouPerdeu.text("Você perdeu!");
-      }
-    }
-    if (numeroClicado == 1) {
-      if (numeroAleatorio == 0) {
-        contadorDeVitorias();
-        ganhouPerdeu.text("Você ganhou!");
-      } else {
-        contadorDeDerrotas();
-        ganhouPerdeu.text("Você perdeu!");
-      }
-    }
-    if (numeroClicado == 2) {
-      if (numeroAleatorio == 1) {
-        contadorDeVitorias();
-        ganhouPerdeu.text("Você ganhou!");
-      } else {
-        contadorDeDerrotas();
-        ganhouPerdeu.text("Você perdeu!");
-      }
-    }
+    contadorDeDerrotas();
+    ganhouPerdeu.text(`Você perdeu! ${computerChoiceName} vence ${playerChoiceName}.`);
   }
 }
 
