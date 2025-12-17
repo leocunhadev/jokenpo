@@ -77,3 +77,11 @@ $(".reset-button").click(function () {
   autoSaveScore(); // Persist the reset score
   $("#playerName").val("").trigger("change");
 });
+
+$(".high-scores-button").click(function () {
+  $(".high-scores").addClass("visible");
+});
+
+$(".back-button").click(function () {
+  $(".high-scores").removeClass("visible");
+});

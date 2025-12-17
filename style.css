@@ -155,8 +155,32 @@ body {
     margin-top: 5px;
 }
 
-.reset-button:hover {
+.reset-button:hover,
+.high-scores-button:hover,
+.back-button:hover {
     background-color: #8bac0f;
+}
+
+.high-scores-button, .back-button {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 0.9rem;
+    color: #0f380f;
+    background-color: #9bbc0f;
+    border: 2px solid #306230;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.1s ease;
+    margin-top: 5px;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: calc(100% - 30px);
 }
 
 .high-scores {
