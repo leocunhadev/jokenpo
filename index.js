@@ -11,6 +11,39 @@ $(document).ready(function() {
     displayHighScores();
 });
 
+$("#playerName").change(function () {
+    const playerName = $(this).val().trim();
+    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+
+    if (playerName === "") {
+        suasVitorias = 0;
+        suasDerrotas = 0;
+        empates = 0;
+        // Also remove from high scores if name is cleared
+        highScores = highScores.filter(score => score.name.toLowerCase() !== playerName.toLowerCase());
+        localStorage.setItem('highScores', JSON.stringify(highScores));
+        displayHighScores();
+    } else {
+        const existingScore = highScores.find(score => score.name.toLowerCase() === playerName.toLowerCase());
+
+        if (existingScore) {
+            suasVitorias = existingScore.wins;
+            suasDerrotas = existingScore.losses;
+            empates = existingScore.ties;
+        } else {
+            suasVitorias = 0;
+            suasDerrotas = 0;
+            empates = 0;
+        }
+    }
+
+    $(".vitorias").text(suasVitorias);
+    $(".derrotas").text(suasDerrotas);
+    $(".empates").text(empates);
+    ganhouPerdeu.text("");
+    $(".imagemMao").removeClass("visible");
+});
+
 function autoSaveScore() {
     const playerName = $("#playerName").val().trim();
     if (playerName === "") {
@@ -80,6 +113,7 @@ $(".reset-button").click(function () {
   ganhouPerdeu.text("");
   $(".imagemMao").removeClass("visible");
   autoSaveScore(); // Persist the reset score
+  $("#playerName").val("").trigger("change");
 });
 
 function dandoNome(choice) {
