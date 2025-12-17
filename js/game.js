@@ -26,17 +26,16 @@ function resultado() {
 }
 
 function colocaImagem() {
-  var classImagens = $(".imagemMao");
-  if (gameState.numeroAleatorio == 0) {
-    classImagens.attr("src", "img/pedra.png").attr("alt", "Rock");
-  }
-  if (gameState.numeroAleatorio == 1) {
-    classImagens.attr("src", "img/papel.png").attr("alt", "Paper");
-  }
-  if (gameState.numeroAleatorio == 2) {
-    classImagens.attr("src", "img/tesoura.png").attr("alt", "Scissors");
-  }
-  classImagens.addClass("visible");
+  const choices = [
+    { src: "img/pedra.png", alt: "Pedra" },
+    { src: "img/papel.png", alt: "Papel" },
+    { src: "img/tesoura.png", alt: "Tesoura" },
+  ];
+  const choice = choices[gameState.numeroAleatorio];
+  $(".imagemMao")
+    .attr("src", choice.src)
+    .attr("alt", choice.alt)
+    .addClass("visible");
 }
 
 function contadorDeVitorias() {
