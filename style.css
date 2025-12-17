@@ -36,6 +36,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     color: #0f380f;
+    position: relative; /* Add positioning context for the high scores overlay */
 }
 
 .screen-title {
@@ -186,11 +187,79 @@ body {
     filter: invert(1);
 }
 
-.reset-button:active {
-    transform: translateY(1px);
+/* Player Name Input */
+.player-name {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.reset-button:focus-visible {
+#playerName {
+    background-color: #d3d3d3;
+    border: 2px solid #808080;
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-family: 'Press Start 2P', sans-serif;
+    color: #333;
+    width: 150px;
+    text-transform: uppercase;
+}
+
+#playerName:focus-visible {
     outline: 3px solid #306230;
     outline-offset: 2px;
+}
+
+
+/* High Scores */
+.high-scores {
+    position: absolute;
+    inset: 0; /* Cover the entire screen area */
+    background-color: rgba(155, 188, 15, 0.95);
+    /* Same as screen, with slight transparency */
+    color: #0f380f;
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 10;
+    visibility: hidden;
+    /* Initially hidden */
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.high-scores.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Hide game results when high scores are shown */
+.high-scores.visible ~ .screen-title,
+.high-scores.visible ~ .computer-choice,
+.high-scores.visible ~ .results {
+    visibility: hidden;
+}
+
+.high-scores h2 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #306230;
+    padding-bottom: 5px;
+}
+
+#highScoresList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+#highScoresList li {
+    padding: 2px 0;
+    display: flex;
+    justify-content: space-between;
 }

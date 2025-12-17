@@ -11,12 +11,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 
 <body>
 
   <div class="gameboy">
     <div class="screen">
+      <div class="high-scores">
+        <h2>High Scores</h2>
+        <ol id="highScoresList"></ol>
+      </div>
       <h1 class="screen-title">Computer's choice</h1>
       <div class="computer-choice">
         <img src="" alt="A escolha do computador" class="imagemMao" />
@@ -35,6 +41,10 @@
       </div>
     </div>
     <div class="controls">
+      <div class="player-name">
+        <label for="playerName">Player:</label>
+        <input type="text" id="playerName" maxlength="10">
+      </div>
       <div class="action-buttons">
           <button class="pedra" aria-label="Choose Rock"><img src="img/pedra.png" alt="Rock" /></button>
           <button class="papel" aria-label="Choose Paper"><img src="img/papel.png" alt="Paper" /></button>
