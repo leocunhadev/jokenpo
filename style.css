@@ -36,14 +36,31 @@ body {
     color: #0f380f;
 }
 
+.screen-title {
+    text-align: center;
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #306230;
+    line-height: 1.2;
+}
+
 .computer-choice {
     text-align: center;
-    min-height: 100px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .computer-choice img {
     max-width: 80px;
     filter: grayscale(1) contrast(1.5);
+    visibility: hidden; /* Hide by default */
+}
+
+.computer-choice img.visible {
+    visibility: visible; /* Show when class is added */
 }
 
 .results {

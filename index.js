@@ -89,6 +89,7 @@ function colocaImagem() {
   if (numeroAleatorio == 2) {
     classImagens.attr("src", "img/tesoura.png");
   }
+  classImagens.addClass("visible");
 }
 
 function contadorDeVitorias() {
