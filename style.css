@@ -13,7 +13,7 @@ body {
 /* Gameboy Container */
 .gameboy {
     width: 320px;
-    height: 550px;
+    height: auto;
     background-color: #a0a0a0;
     border-radius: 10px 10px 30px 10px;
     padding: 20px;
@@ -124,6 +124,66 @@ body {
     outline-offset: 2px;
 }
 
+.score-container {
+    padding: 10px;
+    border-top: 2px solid #306230;
+}
+
+#playerName {
+    width: calc(100% - 10px);
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 2px solid #306230;
+    background-color: #9bbc0f;
+    color: #0f380f;
+    font-family: 'Press Start 2P', sans-serif;
+}
+
+#playerName::placeholder {
+    color: #306230;
+}
+
+.save-button, .reset-button {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 0.9rem;
+    color: #0f380f;
+    background-color: #9bbc0f;
+    border: 2px solid #306230;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.1s ease;
+    margin-top: 5px;
+}
+
+.save-button:hover, .reset-button:hover {
+    background-color: #8bac0f;
+}
+
+.high-scores {
+    margin-top: 10px;
+}
+
+.high-scores h2 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#highScoreList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+#highScoreList li {
+    margin-bottom: 5px;
+}
+
 .action-buttons img {
     width: 40px;
     height: 40px;
@@ -153,7 +213,11 @@ body {
     transform: translateY(1px);
 }
 
-.reset-button:focus-visible {
+.save-button:active, .reset-button:active {
+    transform: translateY(1px);
+}
+
+.save-button:focus-visible, .reset-button:focus-visible {
     outline: 3px solid #306230;
     outline-offset: 2px;
 }

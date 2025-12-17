@@ -5,6 +5,45 @@ var suasDerrotas = 0;
 var empates = 0;
 
 var ganhouPerdeu = $(".ganhou-perdeu");
+const MAX_HIGH_SCORES = 5;
+
+$(document).ready(function() {
+    displayHighScores();
+});
+
+$(".save-button").click(function () {
+    const playerName = $("#playerName").val();
+    if (playerName.trim() === "") {
+        alert("Please enter a name.");
+        return;
+    }
+
+    const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    const newScore = {
+        name: playerName,
+        wins: suasVitorias,
+        losses: suasDerrotas,
+        ties: empates
+    };
+
+    highScores.push(newScore);
+    highScores.sort((a, b) => b.wins - a.wins); // Sort by wins descending
+    highScores.splice(MAX_HIGH_SCORES); // Keep only top 5
+
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    displayHighScores();
+});
+
+function displayHighScores() {
+    const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    const highScoreList = $("#highScoreList");
+    highScoreList.empty();
+
+    highScores.forEach(score => {
+        const newScoreItem = `<li>${score.name} - V: ${score.wins}, D: ${score.losses}, E: ${score.ties}</li>`;
+        highScoreList.append(newScoreItem);
+    });
+}
 
 $(".pedra").click(function () {
   numeroClicado = 0;
