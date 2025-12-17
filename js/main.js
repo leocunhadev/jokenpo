@@ -13,29 +13,39 @@ $(document).ready(function() {
 
 $("#playerName").focus(function () {
     $(this).data('last-name', $(this).val().trim());
-}).change(function () {
+}).change(async function () {
     const playerName = $(this).val().trim();
-    let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
     if (playerName === "") {
         gameState.suasVitorias = 0;
         gameState.suasDerrotas = 0;
         gameState.empates = 0;
-        // Also remove from high scores if name is cleared
         const nameToRemove = $(this).data('last-name');
         if (nameToRemove) {
-            const updatedHighScores = highScores.filter(score => score.name.toLowerCase() !== nameToRemove.toLowerCase());
-            localStorage.setItem('highScores', JSON.stringify(updatedHighScores));
+            try {
+                await db.collection('scores').doc(nameToRemove).delete();
+            } catch (error) {
+                console.error("Error deleting score from Firestore: ", error);
+            }
         }
         displayHighScores();
     } else {
-        const existingScore = highScores.find(score => score.name.toLowerCase() === playerName.toLowerCase());
+        try {
+            const docRef = db.collection('scores').doc(playerName);
+            const doc = await docRef.get();
 
-        if (existingScore) {
-            gameState.suasVitorias = existingScore.wins;
-            gameState.suasDerrotas = existingScore.losses;
-            gameState.empates = existingScore.ties;
-        } else {
+            if (doc.exists) {
+                const existingScore = doc.data();
+                gameState.suasVitorias = existingScore.wins;
+                gameState.suasDerrotas = existingScore.losses;
+                gameState.empates = existingScore.ties;
+            } else {
+                gameState.suasVitorias = 0;
+                gameState.suasDerrotas = 0;
+                gameState.empates = 0;
+            }
+        } catch (error) {
+            console.error("Error fetching score from Firestore: ", error);
             gameState.suasVitorias = 0;
             gameState.suasDerrotas = 0;
             gameState.empates = 0;
