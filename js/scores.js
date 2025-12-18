@@ -33,7 +33,7 @@ async function displayHighScores() {
 
         querySnapshot.forEach((doc) => {
             const score = doc.data();
-            const newScoreItem = `<li>${score.name} - V: ${score.wins}, D: ${score.losses}, E: ${score.ties}</li>`;
+            const newScoreItem = `<li>${score.name} - V:${score.wins}, D:${score.losses}</li>`;
             highScoreList.append(newScoreItem);
         });
     } catch (error) {
