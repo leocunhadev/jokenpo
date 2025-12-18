@@ -100,8 +100,10 @@ $(".reset-button").click(function () {
 
 $(".high-scores-button").click(function () {
   $(".high-scores").addClass("visible");
+  $('.controls button, .controls input').prop('disabled', true);
 });
 
 $(".back-button").click(function () {
   $(".high-scores").removeClass("visible");
+  $('.controls button, .controls input').prop('disabled', false);
 });
