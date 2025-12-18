@@ -11,19 +11,22 @@ $(document).ready(function() {
     displayHighScores();
 });
 
-$("#playerName").focus(function () {
-    $(this).data('last-name', $(this).val().trim().toUpperCase());
-}).change(async function () {
-    const playerName = $(this).val().trim().toUpperCase();
+async function handlePlayerNameChange() {
+    const $playerName = $("#playerName");
+    const playerName = $playerName.val().trim().toUpperCase();
+    const lastPlayerName = $playerName.data('last-name');
+
+    if (playerName === lastPlayerName) {
+        return; // No change in player name
+    }
 
     if (playerName === "") {
         gameState.suasVitorias = 0;
         gameState.suasDerrotas = 0;
         gameState.empates = 0;
-        const nameToRemove = $(this).data('last-name');
-        if (nameToRemove) {
+        if (lastPlayerName) {
             try {
-                await db.collection('scores').doc(nameToRemove).delete();
+                await db.collection('scores').doc(lastPlayerName).delete();
             } catch (error) {
                 console.error("Error deleting score from Firestore: ", error);
             }
@@ -57,19 +60,26 @@ $("#playerName").focus(function () {
     $(".empates").text(gameState.empates);
     gameState.ganhouPerdeu.text("");
     $(".imagemMao").removeClass("visible");
-});
 
-$(".pedra").click(function () {
+    $playerName.data('last-name', playerName);
+}
+
+$("#playerName").change(handlePlayerNameChange);
+
+$(".pedra").click(async function () {
+  await handlePlayerNameChange();
   gameState.numeroClicado = 0;
   geraNumero();
   resultado();
 });
-$(".papel").click(function () {
+$(".papel").click(async function () {
+  await handlePlayerNameChange();
   gameState.numeroClicado = 1;
   geraNumero();
   resultado();
 });
-$(".tesoura").click(function () {
+$(".tesoura").click(async function () {
+  await handlePlayerNameChange();
   gameState.numeroClicado = 2;
   geraNumero();
   resultado();
