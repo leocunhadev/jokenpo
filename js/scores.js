@@ -1,7 +1,7 @@
 const MAX_HIGH_SCORES = 5;
 
 async function autoSaveScore() {
-    const playerName = $("#playerName").val().trim();
+    const playerName = $("#playerName").val().trim().toUpperCase();
     if (playerName === "") {
         return; // Don't save if no name is entered
     }
