@@ -12,9 +12,9 @@ $(document).ready(function() {
 });
 
 $("#playerName").focus(function () {
-    $(this).data('last-name', $(this).val().trim());
+    $(this).data('last-name', $(this).val().trim().toUpperCase());
 }).change(async function () {
-    const playerName = $(this).val().trim();
+    const playerName = $(this).val().trim().toUpperCase();
 
     if (playerName === "") {
         gameState.suasVitorias = 0;
