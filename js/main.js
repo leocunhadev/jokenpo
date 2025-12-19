@@ -86,16 +86,18 @@ $(".tesoura").click(async function () {
 });
 
 $(".reset-button").click(function () {
-  gameState.suasVitorias = 0;
-  gameState.suasDerrotas = 0;
-  gameState.empates = 0;
-  $(".vitorias").text(gameState.suasVitorias);
-  $(".derrotas").text(gameState.suasDerrotas);
-  $(".empates").text(gameState.empates);
-  gameState.ganhouPerdeu.text("");
-  $(".imagemMao").removeClass("visible");
-  autoSaveScore(); // Persist the reset score
-  $("#playerName").val("").trigger("change");
+  if (window.confirm("Tem certeza que deseja zerar o placar?")) {
+    gameState.suasVitorias = 0;
+    gameState.suasDerrotas = 0;
+    gameState.empates = 0;
+    $(".vitorias").text(gameState.suasVitorias);
+    $(".derrotas").text(gameState.suasDerrotas);
+    $(".empates").text(gameState.empates);
+    gameState.ganhouPerdeu.text("");
+    $(".imagemMao").removeClass("visible");
+    autoSaveScore(); // Persist the reset score
+    $("#playerName").val("").trigger("change");
+  }
 });
 
 $(".high-scores-button").click(function () {
