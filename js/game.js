@@ -28,14 +28,15 @@ function resultado() {
 function colocaImagem() {
   var classImagens = $(".imagemMao");
   if (gameState.numeroAleatorio == 0) {
-    classImagens.attr("src", "img/pedra.png").attr("alt", "Rock");
+    classImagens.attr("src", "img/pedra.png");
   }
   if (gameState.numeroAleatorio == 1) {
-    classImagens.attr("src", "img/papel.png").attr("alt", "Paper");
+    classImagens.attr("src", "img/papel.png");
   }
   if (gameState.numeroAleatorio == 2) {
-    classImagens.attr("src", "img/tesoura.png").attr("alt", "Scissors");
+    classImagens.attr("src", "img/tesoura.png");
   }
+  classImagens.attr("alt", `O computador escolheu ${dandoNome(gameState.numeroAleatorio)}`);
   classImagens.addClass("visible");
 }
 
