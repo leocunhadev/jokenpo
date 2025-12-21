@@ -99,9 +99,16 @@ $(".reset-button").click(function () {
 });
 
 $(".high-scores-button").click(function () {
-  $(".high-scores").addClass("visible");
+  $(".controls button, .controls input").prop("disabled", true);
+  $(".high-scores").addClass("visible").on("transitionend", function() {
+    $(".back-button").focus();
+    // Remove the event listener to prevent it from firing multiple times
+    $(this).off("transitionend");
+  });
 });
 
 $(".back-button").click(function () {
   $(".high-scores").removeClass("visible");
+  $(".controls button, .controls input").prop("disabled", false);
+  $(".high-scores-button").focus();
 });

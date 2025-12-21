@@ -161,6 +161,19 @@ body {
     background-color: #8bac0f;
 }
 
+.reset-button:active,
+.high-scores-button:active,
+.back-button:active {
+    transform: translateY(1px);
+}
+
+.reset-button:focus-visible,
+.high-scores-button:focus-visible,
+.back-button:focus-visible {
+    outline: 3px solid #306230;
+    outline-offset: 2px;
+}
+
 .high-scores-button, .back-button {
     width: 100%;
     padding: 10px;
