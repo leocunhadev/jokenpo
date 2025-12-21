@@ -66,23 +66,28 @@ async function handlePlayerNameChange() {
 
 $("#playerName").change(handlePlayerNameChange);
 
+function handlePlayerChoice(choice) {
+    gameState.numeroClicado = choice;
+    startThinkingAnimation();
+    setTimeout(() => {
+        stopThinkingAnimation();
+        geraNumero();
+        colocaImagem(); // Now call this to set the final image
+        resultado();
+    }, 1000); // 1 second "thinking" time
+}
+
 $(".pedra").click(async function () {
   await handlePlayerNameChange();
-  gameState.numeroClicado = 0;
-  geraNumero();
-  resultado();
+  handlePlayerChoice(0);
 });
 $(".papel").click(async function () {
   await handlePlayerNameChange();
-  gameState.numeroClicado = 1;
-  geraNumero();
-  resultado();
+  handlePlayerChoice(1);
 });
 $(".tesoura").click(async function () {
   await handlePlayerNameChange();
-  gameState.numeroClicado = 2;
-  geraNumero();
-  resultado();
+  handlePlayerChoice(2);
 });
 
 $(".reset-button").click(function () {
