@@ -1,4 +1,4 @@
-const MAX_HIGH_SCORES = 5;
+const MAX_HIGH_SCORES = 12;
 
 async function autoSaveScore() {
     const playerName = $("#playerName").val().trim().toUpperCase();
