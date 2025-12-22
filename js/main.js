@@ -85,21 +85,34 @@ $(".tesoura").click(async function () {
   resultado();
 });
 
-$(".reset-button").click(function () {
-  gameState.suasVitorias = 0;
-  gameState.suasDerrotas = 0;
-  gameState.empates = 0;
-  $(".vitorias").text(gameState.suasVitorias);
-  $(".derrotas").text(gameState.suasDerrotas);
-  $(".empates").text(gameState.empates);
-  gameState.ganhouPerdeu.text("");
-  $(".imagemMao").removeClass("visible");
-  autoSaveScore(); // Persist the reset score
-  $("#playerName").val("").trigger("change");
+$(".reset-button").click(async function () {
+    const playerName = $("#playerName").val().trim().toUpperCase();
+
+    gameState.suasVitorias = 0;
+    gameState.suasDerrotas = 0;
+    gameState.empates = 0;
+
+    $(".vitorias").text(gameState.suasVitorias);
+    $(".derrotas").text(gameState.suasDerrotas);
+    $(".empates").text(gameState.empates);
+    gameState.ganhouPerdeu.text("");
+    $(".imagemMao").removeClass("visible");
+    $("#playerName").val("");
+    $("#playerName").data('last-name', '');
+
+    if (playerName) {
+        try {
+            await db.collection('scores').doc(playerName).delete();
+        } catch (error) {
+            console.error("Error deleting score from Firestore: ", error);
+        }
+    }
+    await displayHighScores();
 });
 
 $(".high-scores-button").click(function () {
-  $(".high-scores").addClass("visible");
+    displayHighScores();
+    $(".high-scores").addClass("visible");
 });
 
 $(".back-button").click(function () {
