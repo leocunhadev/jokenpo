@@ -111,10 +111,15 @@ $(".reset-button").click(async function () {
 });
 
 $(".high-scores-button").click(function () {
-    displayHighScores();
-    $(".high-scores").addClass("visible");
-});
+    const $highScores = $(".high-scores");
+    const $button = $(this);
 
-$(".back-button").click(function () {
-  $(".high-scores").removeClass("visible");
+    $highScores.toggleClass("visible");
+
+    if ($highScores.hasClass("visible")) {
+        displayHighScores();
+        $button.text("Back");
+    } else {
+        $button.text("High Scores");
+    }
 });
