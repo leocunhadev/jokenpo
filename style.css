@@ -37,7 +37,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     color: #0f380f;
-    position: relative; /* Add positioning context for the high scores overlay */
+    position: relative;
+    /* Add positioning context for the high scores overlay */
 }
 
 .screen-title {
@@ -96,6 +97,7 @@ body {
 .action-buttons {
     display: flex;
     gap: 15px;
+    margin-bottom: 15px;
 }
 
 .action-buttons button {
@@ -151,7 +153,8 @@ body {
     border: 2px solid #505050;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 20; /* Ensure it's above the screen */
+    z-index: 20;
+    /* Ensure it's above the screen */
     transition: all 0.1s ease;
 }
 
@@ -169,7 +172,8 @@ body {
     background-color: #8bac0f;
 }
 
-.high-scores-button, .back-button {
+.high-scores-button,
+.back-button {
     width: 100%;
     padding: 10px;
     font-family: 'Press Start 2P', sans-serif;
@@ -249,7 +253,8 @@ body {
 /* High Scores */
 .high-scores {
     position: absolute;
-    inset: 0; /* Cover the entire screen area */
+    inset: 0;
+    /* Cover the entire screen area */
     background-color: rgba(155, 188, 15, 0.95);
     /* Same as screen, with slight transparency */
     color: #0f380f;
@@ -269,9 +274,9 @@ body {
 }
 
 /* Hide game results when high scores are shown */
-.high-scores.visible ~ .screen-title,
-.high-scores.visible ~ .computer-choice,
-.high-scores.visible ~ .results {
+.high-scores.visible~.screen-title,
+.high-scores.visible~.computer-choice,
+.high-scores.visible~.results {
     visibility: hidden;
 }
 
