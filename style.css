@@ -22,6 +22,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
 /* Screen Styles */
@@ -141,21 +142,28 @@ body {
 }
 
 .reset-button {
-    width: 100%;
-    padding: 10px;
-    font-family: 'Press Start 2P', sans-serif;
-    font-size: 0.9rem;
-    color: #0f380f;
-    background-color: #9bbc0f;
-    border: 2px solid #306230;
-    border-radius: 5px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 15px;
+    height: 15px;
+    background-color: #707070;
+    border: 2px solid #505050;
+    border-radius: 50%;
     cursor: pointer;
-    text-transform: uppercase;
+    z-index: 20; /* Ensure it's above the screen */
     transition: all 0.1s ease;
-    margin-top: 5px;
 }
 
-.reset-button:hover,
+.reset-button:focus-visible {
+    outline: 3px solid #306230;
+    outline-offset: 2px;
+}
+
+.reset-button:hover {
+    background-color: #808080;
+}
+
 .high-scores-button:hover,
 .back-button:hover {
     background-color: #8bac0f;
