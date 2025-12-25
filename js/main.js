@@ -84,6 +84,18 @@ $(".tesoura").click(async function () {
   geraNumero();
   resultado();
 });
+$(".lagarto").click(async function () {
+    await handlePlayerNameChange();
+    gameState.numeroClicado = 3;
+    geraNumero();
+    resultado();
+});
+$(".spock").click(async function () {
+    await handlePlayerNameChange();
+    gameState.numeroClicado = 4;
+    geraNumero();
+    resultado();
+});
 
 $(".reset-button").click(async function () {
     const playerName = $("#playerName").val().trim().toUpperCase();
