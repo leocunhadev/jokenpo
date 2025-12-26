@@ -1,21 +1,36 @@
+const winConditions = {
+  // Pedra
+  0: [2, 3],
+  // Papel
+  1: [0, 4],
+  // Tesoura
+  2: [1, 3],
+  // Lagarto
+  3: [1, 4],
+  // Spock
+  4: [0, 2],
+};
+
 function dandoNome(choice) {
-  const choices = ["Pedra", "Papel", "Tesoura"];
+  const choices = ["Pedra", "Papel", "Tesoura", "Lagarto", "Spock"];
   return choices[choice];
 }
 
 function geraNumero() {
-  gameState.numeroAleatorio = Math.floor(Math.random() * 3);
+  gameState.numeroAleatorio = Math.floor(Math.random() * 5);
   colocaImagem();
 }
 
 function resultado() {
-  const playerChoiceName = dandoNome(gameState.numeroClicado);
-  const computerChoiceName = dandoNome(gameState.numeroAleatorio);
+  const playerChoice = gameState.numeroClicado;
+  const computerChoice = gameState.numeroAleatorio;
+  const playerChoiceName = dandoNome(playerChoice);
+  const computerChoiceName = dandoNome(computerChoice);
 
-  if (gameState.numeroClicado == gameState.numeroAleatorio) {
+  if (playerChoice === computerChoice) {
     numDeEmpates();
     gameState.ganhouPerdeu.text(`Empate! Ambos escolheram ${playerChoiceName}.`);
-  } else if ((gameState.numeroClicado - gameState.numeroAleatorio + 3) % 3 == 1) {
+  } else if (winConditions[playerChoice].includes(computerChoice)) {
     contadorDeVitorias();
     gameState.ganhouPerdeu.text(`Você ganhou! ${playerChoiceName} vence ${computerChoiceName}.`);
   } else {
@@ -26,17 +41,20 @@ function resultado() {
 }
 
 function colocaImagem() {
-  var classImagens = $(".imagemMao");
-  if (gameState.numeroAleatorio == 0) {
-    classImagens.attr("src", "img/pedra.png").attr("alt", "Rock");
-  }
-  if (gameState.numeroAleatorio == 1) {
-    classImagens.attr("src", "img/papel.png").attr("alt", "Paper");
-  }
-  if (gameState.numeroAleatorio == 2) {
-    classImagens.attr("src", "img/tesoura.png").attr("alt", "Scissors");
-  }
-  classImagens.addClass("visible");
+  const imagePaths = [
+    "img/pedra.png",
+    "img/papel.png",
+    "img/tesoura.png",
+    "img/lagarto.png",
+    "img/spock.png",
+  ];
+  const choiceIndex = gameState.numeroAleatorio;
+  const choiceName = dandoNome(choiceIndex);
+
+  $(".imagemMao")
+    .attr("src", imagePaths[choiceIndex])
+    .attr("alt", choiceName)
+    .addClass("visible");
 }
 
 function contadorDeVitorias() {
