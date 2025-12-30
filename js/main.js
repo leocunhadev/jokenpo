@@ -66,23 +66,12 @@ async function handlePlayerNameChange() {
 
 $("#playerName").change(handlePlayerNameChange);
 
-$(".pedra").click(async function () {
+$(".action-button").click(async function () {
   await handlePlayerNameChange();
-  gameState.numeroClicado = 0;
+  const playerChoice = parseInt($(this).data('choice'));
+  gameState.numeroClicado = playerChoice;
   geraNumero();
-  resultado();
-});
-$(".papel").click(async function () {
-  await handlePlayerNameChange();
-  gameState.numeroClicado = 1;
-  geraNumero();
-  resultado();
-});
-$(".tesoura").click(async function () {
-  await handlePlayerNameChange();
-  gameState.numeroClicado = 2;
-  geraNumero();
-  resultado();
+  resultado(playerChoice);
 });
 
 $(".reset-button").click(async function () {
