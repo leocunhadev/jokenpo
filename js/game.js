@@ -8,14 +8,14 @@ function geraNumero() {
   colocaImagem();
 }
 
-function resultado() {
-  const playerChoiceName = dandoNome(gameState.numeroClicado);
+function resultado(playerChoice) {
+  const playerChoiceName = dandoNome(playerChoice);
   const computerChoiceName = dandoNome(gameState.numeroAleatorio);
 
-  if (gameState.numeroClicado == gameState.numeroAleatorio) {
+  if (playerChoice == gameState.numeroAleatorio) {
     numDeEmpates();
     gameState.ganhouPerdeu.text(`Empate! Ambos escolheram ${playerChoiceName}.`);
-  } else if ((gameState.numeroClicado - gameState.numeroAleatorio + 3) % 3 == 1) {
+  } else if ((playerChoice - gameState.numeroAleatorio + 3) % 3 == 1) {
     contadorDeVitorias();
     gameState.ganhouPerdeu.text(`Você ganhou! ${playerChoiceName} vence ${computerChoiceName}.`);
   } else {
