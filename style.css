@@ -300,3 +300,39 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+/* Result Feedback Styles */
+.result-win {
+    color: #306230;
+    /* Dark green */
+    animation: flash 1s ease-out;
+}
+
+.result-loss {
+    color: #8b0000;
+    /* Dark red */
+    animation: flash 1s ease-out;
+}
+
+.result-tie {
+    color: #505050;
+    /* Dark gray */
+    animation: flash 1s ease-out;
+}
+
+@keyframes flash {
+    0% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
