@@ -96,22 +96,28 @@ body {
 
 .action-buttons {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
     margin-bottom: 15px;
 }
 
 .action-buttons button {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
     border: 2px solid #505050;
     background-color: #707070;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: all 0.1s ease;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 0.6rem;
+    color: #dedede;
 }
 
 .action-buttons button:hover {
@@ -221,6 +227,10 @@ body {
     width: 40px;
     height: 40px;
     filter: invert(1);
+}
+
+.action-buttons button span {
+    margin-top: 5px;
 }
 
 /* Player Name Input */
