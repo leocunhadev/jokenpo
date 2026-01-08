@@ -12,15 +12,24 @@ function resultado() {
   const playerChoiceName = dandoNome(gameState.numeroClicado);
   const computerChoiceName = dandoNome(gameState.numeroAleatorio);
 
+  const choices = ["pedra", "papel", "tesoura"];
+  const playerChoiceSelector = `.${choices[gameState.numeroClicado]}`;
+  const $playerChoice = $(playerChoiceSelector)
+  const $computerChoice = $('.imagemMao');
+
   if (gameState.numeroClicado == gameState.numeroAleatorio) {
     numDeEmpates();
     gameState.ganhouPerdeu.text(`Empate! Ambos escolheram ${playerChoiceName}.`);
   } else if ((gameState.numeroClicado - gameState.numeroAleatorio + 3) % 3 == 1) {
     contadorDeVitorias();
     gameState.ganhouPerdeu.text(`Você ganhou! ${playerChoiceName} vence ${computerChoiceName}.`);
+    $playerChoice.addClass('winner');
+    $computerChoice.addClass('loser');
   } else {
     contadorDeDerrotas();
     gameState.ganhouPerdeu.text(`Você perdeu! ${computerChoiceName} vence ${playerChoiceName}.`);
+    $playerChoice.addClass('loser');
+    $computerChoice.addClass('winner');
   }
   autoSaveScore();
 }
