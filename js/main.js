@@ -66,20 +66,28 @@ async function handlePlayerNameChange() {
 
 $("#playerName").change(handlePlayerNameChange);
 
+function clearFeedbackClasses() {
+    $('.action-buttons button').removeClass('winner loser');
+    $('.imagemMao').removeClass('winner loser');
+}
+
 $(".pedra").click(async function () {
   await handlePlayerNameChange();
+  clearFeedbackClasses();
   gameState.numeroClicado = 0;
   geraNumero();
   resultado();
 });
 $(".papel").click(async function () {
   await handlePlayerNameChange();
+  clearFeedbackClasses();
   gameState.numeroClicado = 1;
   geraNumero();
   resultado();
 });
 $(".tesoura").click(async function () {
   await handlePlayerNameChange();
+  clearFeedbackClasses();
   gameState.numeroClicado = 2;
   geraNumero();
   resultado();
