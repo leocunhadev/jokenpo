@@ -1,10 +1,26 @@
+const choices = ["Pedra", "Papel", "Tesoura", "Lagarto", "Spock"];
+const imagePaths = [
+    { src: "img/pedra.png", alt: "Rock" },
+    { src: "img/papel.png", alt: "Paper" },
+    { src: "img/tesoura.png", alt: "Scissors" },
+    { src: "img/lagarto.png", alt: "Lizard" },
+    { src: "img/spock.png", alt: "Spock" }
+];
+
+const winConditions = {
+    "Pedra": ["Tesoura", "Lagarto"],
+    "Papel": ["Pedra", "Spock"],
+    "Tesoura": ["Papel", "Lagarto"],
+    "Lagarto": ["Spock", "Papel"],
+    "Spock": ["Tesoura", "Pedra"]
+};
+
 function dandoNome(choice) {
-  const choices = ["Pedra", "Papel", "Tesoura"];
   return choices[choice];
 }
 
 function geraNumero() {
-  gameState.numeroAleatorio = Math.floor(Math.random() * 3);
+  gameState.numeroAleatorio = Math.floor(Math.random() * 5);
   colocaImagem();
 }
 
@@ -12,10 +28,10 @@ function resultado() {
   const playerChoiceName = dandoNome(gameState.numeroClicado);
   const computerChoiceName = dandoNome(gameState.numeroAleatorio);
 
-  if (gameState.numeroClicado == gameState.numeroAleatorio) {
+  if (playerChoiceName === computerChoiceName) {
     numDeEmpates();
     gameState.ganhouPerdeu.text(`Empate! Ambos escolheram ${playerChoiceName}.`);
-  } else if ((gameState.numeroClicado - gameState.numeroAleatorio + 3) % 3 == 1) {
+  } else if (winConditions[playerChoiceName].includes(computerChoiceName)) {
     contadorDeVitorias();
     gameState.ganhouPerdeu.text(`Você ganhou! ${playerChoiceName} vence ${computerChoiceName}.`);
   } else {
@@ -26,16 +42,9 @@ function resultado() {
 }
 
 function colocaImagem() {
-  var classImagens = $(".imagemMao");
-  if (gameState.numeroAleatorio == 0) {
-    classImagens.attr("src", "img/pedra.png").attr("alt", "Rock");
-  }
-  if (gameState.numeroAleatorio == 1) {
-    classImagens.attr("src", "img/papel.png").attr("alt", "Paper");
-  }
-  if (gameState.numeroAleatorio == 2) {
-    classImagens.attr("src", "img/tesoura.png").attr("alt", "Scissors");
-  }
+  const classImagens = $(".imagemMao");
+  const imageInfo = imagePaths[gameState.numeroAleatorio];
+  classImagens.attr("src", imageInfo.src).attr("alt", imageInfo.alt);
   classImagens.addClass("visible");
 }
 
