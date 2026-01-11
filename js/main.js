@@ -4,7 +4,8 @@ const gameState = {
     suasVitorias: 0,
     suasDerrotas: 0,
     empates: 0,
-    ganhouPerdeu: $(".ganhou-perdeu")
+    ganhouPerdeu: $(".ganhou-perdeu"),
+    roundHistory: []
 };
 
 $(document).ready(function() {
@@ -60,6 +61,8 @@ async function handlePlayerNameChange() {
     $(".empates").text(gameState.empates);
     gameState.ganhouPerdeu.text("");
     $(".imagemMao").removeClass("visible");
+    gameState.roundHistory = [];
+    $("#roundHistory").empty();
 
     $playerName.data('last-name', playerName);
 }
@@ -91,6 +94,8 @@ $(".reset-button").click(async function () {
     gameState.suasVitorias = 0;
     gameState.suasDerrotas = 0;
     gameState.empates = 0;
+    gameState.roundHistory = [];
+    $("#roundHistory").empty();
 
     $(".vitorias").text(gameState.suasVitorias);
     $(".derrotas").text(gameState.suasDerrotas);
