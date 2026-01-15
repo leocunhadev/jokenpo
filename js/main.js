@@ -9,6 +9,11 @@ const gameState = {
 
 $(document).ready(function() {
     displayHighScores();
+    const savedPlayerName = localStorage.getItem('playerName');
+    if (savedPlayerName) {
+        $("#playerName").val(savedPlayerName);
+        handlePlayerNameChange();
+    }
 });
 
 async function handlePlayerNameChange() {
@@ -21,6 +26,7 @@ async function handlePlayerNameChange() {
     }
 
     if (playerName === "") {
+        localStorage.removeItem('playerName');
         gameState.suasVitorias = 0;
         gameState.suasDerrotas = 0;
         gameState.empates = 0;
@@ -33,6 +39,7 @@ async function handlePlayerNameChange() {
         }
         displayHighScores();
     } else {
+        localStorage.setItem('playerName', playerName);
         try {
             const docRef = db.collection('scores').doc(playerName);
             const doc = await docRef.get();
