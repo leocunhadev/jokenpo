@@ -129,20 +129,6 @@ body {
     outline-offset: 2px;
 }
 
-#playerName {
-    width: calc(100% - 10px);
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 2px solid #306230;
-    background-color: #9bbc0f;
-    color: #0f380f;
-    font-family: 'Press Start 2P', sans-serif;
-}
-
-#playerName::placeholder {
-    color: #306230;
-}
-
 .reset-button {
     position: absolute;
     top: 15px;
@@ -205,18 +191,6 @@ body {
     text-align: center;
 }
 
-#highScoreList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 0.8rem;
-    text-align: center;
-}
-
-#highScoreList li {
-    margin-bottom: 5px;
-}
-
 .action-buttons img {
     width: 40px;
     height: 40px;
@@ -237,11 +211,16 @@ body {
     background-color: #d3d3d3;
     border: 2px solid #808080;
     border-radius: 3px;
+    margin-bottom: 10px;
     padding: 5px 8px;
     font-family: 'Press Start 2P', sans-serif;
     color: #333;
     width: 150px;
     text-transform: uppercase;
+}
+
+#playerName::placeholder {
+    color: #666;
 }
 
 #playerName:focus-visible {
